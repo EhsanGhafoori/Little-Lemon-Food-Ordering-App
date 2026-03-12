@@ -1,73 +1,119 @@
-import React, { useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useEffect, useMemo, useReducer } from "react";
+import { Alert } from "react-native";
+import { Onboarding } from "./screens/Onboarding";
+import { Profile } from "./screens/Profile";
+import SplashScreen from "./screens/SplashScreen";
+import { Home } from "./screens/Home";
+import { StatusBar } from "expo-status-bar";
 
-import OnboardingScreen from './src/screens/OnboardingScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
-import { UserProvider, useUser } from './src/context/UserContext';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { AuthContext } from "./contexts/AuthContext";
 
 const Stack = createNativeStackNavigator();
-const ONBOARDING_KEY = '@little_lemon_onboarding_done';
 
-function RootNavigator() {
-  const { hasCompletedOnboarding, setHasCompletedOnboarding, loadUser } = useUser();
-  const [isLoading, setIsLoading] = useState(true);
+export default function App({ navigation }) {
+  const [state, dispatch] = useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case "onboard":
+          return {
+            ...prevState,
+            isLoading: false,
+            isOnboardingCompleted: action.isOnboardingCompleted,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isOnboardingCompleted: false,
+    }
+  );
 
   useEffect(() => {
     (async () => {
+      let profileData = [];
       try {
-        const done = await AsyncStorage.getItem(ONBOARDING_KEY);
-        if (done === 'true') {
-          setHasCompletedOnboarding(true);
-          await loadUser();
+        const getProfile = await AsyncStorage.getItem("profile");
+        if (getProfile !== null) {
+          profileData = getProfile;
         }
-      } catch (e) {}
-      setIsLoading(false);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        if (Object.keys(profileData).length != 0) {
+          dispatch({ type: "onboard", isOnboardingCompleted: true });
+        } else {
+          dispatch({ type: "onboard", isOnboardingCompleted: false });
+        }
+      }
     })();
   }, []);
 
-  const completeOnboarding = async () => {
-    await AsyncStorage.setItem(ONBOARDING_KEY, 'true');
-    setHasCompletedOnboarding(true);
-  };
+  const authContext = useMemo(
+    () => ({
+      onboard: async (data) => {
+        try {
+          const jsonValue = JSON.stringify(data);
+          await AsyncStorage.setItem("profile", jsonValue);
+        } catch (e) {
+          console.error(e);
+        }
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
+        dispatch({ type: "onboard", isOnboardingCompleted: true });
+      },
+      update: async (data) => {
+        try {
+          const jsonValue = JSON.stringify(data);
+          await AsyncStorage.setItem("profile", jsonValue);
+        } catch (e) {
+          console.error(e);
+        }
 
-  if (!hasCompletedOnboarding) {
-    return (
-      <OnboardingScreen onComplete={completeOnboarding} />
-    );
-  }
+        Alert.alert("Success", "Successfully saved changes!");
+      },
+      logout: async () => {
+        try {
+          await AsyncStorage.clear();
+        } catch (e) {
+          console.error(e);
+        }
 
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerBackTitle: 'Back',
-        headerTintColor: '#495E57',
-        headerStyle: { backgroundColor: '#fff' },
-      }}
-    >
-      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
-    </Stack.Navigator>
+        dispatch({ type: "onboard", isOnboardingCompleted: false });
+      },
+    }),
+    []
   );
-}
 
-export default function App() {
+  if (state.isLoading) {
+    return <SplashScreen />;
+  }
+
   return (
-    <UserProvider>
+    <AuthContext.Provider value={authContext}>
+      <StatusBar style="dark" />
       <NavigationContainer>
-        <RootNavigator />
+        <Stack.Navigator>
+          {state.isOnboardingCompleted ? (
+            <>
+              <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="Profile" component={Profile} />
+            </>
+          ) : (
+            <Stack.Screen
+              name="Onboarding"
+              component={Onboarding}
+              options={{ headerShown: false }}
+            />
+          )}
+        </Stack.Navigator>
       </NavigationContainer>
-    </UserProvider>
+    </AuthContext.Provider>
   );
 }

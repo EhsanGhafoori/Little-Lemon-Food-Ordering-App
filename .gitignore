@@ -1,12 +1,14 @@
-node_modules
-.expo
-dist
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
 .DS_Store
-*.log
-.env
-.env.local
-npm-debug.log*
-*.jpeg
-*.jpg
-!assets/*.png
-!wireframe.png
