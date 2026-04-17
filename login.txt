@@ -1,6 +1,6 @@
-curl -X POST "https://api.stayhealthy.example/api/auth/login" ^
-  -H "Content-Type: application/json" ^
-  -d "{\"email\":\"amina@example.com\",\"password\":\"SecurePass1\"}"
+# Endpoint path required by assignment: /api/auth/login
+
+curl -X POST "http://localhost:8000/api/auth/login" -H "Content-Type: application/json" -d "{\"email\":\"amina@example.com\",\"password\":\"SecurePass1\"}"
 
 HTTP/1.1 200 OK
 Content-Type: application/json

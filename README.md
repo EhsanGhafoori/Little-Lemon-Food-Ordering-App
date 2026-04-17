@@ -1,57 +1,100 @@
-# StayHealthy — front-end (Go Digital initiative)
+# Project name: **StayHealthy** — Go Digital healthcare front-end
 
-Fictitious non-profit healthcare platform for the final project: responsive React UI for patients in remote and underserved areas to discover doctors and book appointments.
+**StayHealthy** is a fictitious non-profit patient platform for the final capstone: responsive **HTML/CSS/React** UI so people in remote and underserved areas can browse care, book appointments, and sign in safely. This repository contains the **front-end** only, prepared for later connection to a Django (or other) API.
 
-## Tech stack
+> **Coursera autograder note:** Some checks expect this codebase to live in a GitHub repository named **`med_appt`**. Create `https://github.com/<your-username>/med_appt`, push this project to the **`main`** branch, and paste **blob** URLs that include `/med_appt/` in the path when the rubric asks for that name.
 
-- React 18 + Vite 5
-- React Router v6
-- Plain CSS (accessible, patient-friendly layout)
+---
 
-## Setup
+## Project summary
+
+- **Product:** StayHealthy web app (Home, Appointments, Sign Up, Login, profile, reviews).
+- **Goals:** Accessibility-minded layout, clear navigation, appointment booking flow with doctor search, JWT-style auth hooks (`/api/auth/register`, `/api/auth/login`).
+- **Stack:** React 18, Vite 5, React Router 6, plain CSS.
+
+---
+
+## Prerequisites
+
+- **Node.js** 18+ (LTS recommended)
+- **npm** 9+
+
+---
+
+## Setup (clone & run locally)
 
 ```bash
+git clone https://github.com/<your-username>/med_appt.git
+cd med_appt
 npm install
 npm run dev
 ```
 
-Open the URL printed in the terminal (usually `http://localhost:5173`).
+Open the URL Vite prints (default **`http://localhost:5173`**).
+
+### Back-end API (local)
+
+The app expects an API at **`http://localhost:8000`** by default (typical Django dev server). Endpoints used:
+
+| Method | Path | Purpose |
+|--------|------|--------|
+| POST | `/api/auth/register` | Register user |
+| POST | `/api/auth/login` | Login |
+| GET | `/api/doctors/search` | Doctor search (appointments) |
+| POST | `/api/appointments` | Book appointment |
+| POST | `/api/appointments/ic` | Initial contact (name + phone) |
+| POST | `/api/appointments/:id/cancel` | Cancel appointment |
+| POST | `/api/reviews` | Submit review |
+| PUT | `/api/profile` | Update profile |
+
+Override with `.env`:
+
+```bash
+cp .env.example .env
+# edit VITE_API_BASE_URL if your API host/port differs
+```
+
+---
 
 ## Production build
 
 ```bash
 npm run build
-npm run preview   # optional local preview of dist/
+npm run preview
 ```
 
-## Environment
+Terminal output for peers/graders is also saved in the repo file named **`build`** (no extension).
 
-Copy `.env.example` to `.env` and set `VITE_API_BASE_URL` to your real API when the back end is available. Until then, the app calls placeholder endpoints and surfaces errors in the in-app notification banner.
+---
 
-## PDF sample report
+## Patient report PDF (submission)
 
 ```bash
 npm run pdf
 ```
 
-Writes `public/patient_report.pdf` (also copied to repo root for submission if needed).
+Writes **`patient_report.pdf`** in the project root (sample patient + prescription text).
 
-## Project structure (key files)
+---
 
-| Path | Purpose |
-|------|---------|
-| `src/App.jsx` | Routes + **NotificationProvider** (application-wide notifications) |
-| `src/Navbar.jsx` | Navigation + **logout** |
-| `src/Sign_Up.jsx` | **Registration** API (`POST /api/auth/register`) |
-| `src/Login.jsx` | **Login** API (`POST /api/auth/login`) |
-| `src/FindDoctorSearch.jsx` | **Doctor search** for appointment booking |
-| `src/AppointmentForm.jsx` | Appointment fields: **name, phone, date, time** |
-| `src/AppointmentFormIC.jsx` | **Name + phone only** (initial contact) |
-| `src/GiveReviews.jsx` | Review form; **disabled after successful submit** |
-| `src/ProfileCard.jsx` | Profile card + **edit form** |
-| `src/DoctorCard.jsx` | Doctor row + **cancel appointment** API |
-| `index.html` | **SEO** meta tags |
+## Key source files
 
-## Screenshots for submission
+| File | Role |
+|------|------|
+| `index.html` | SEO meta tags (title, description, Open Graph) |
+| `src/App.jsx` | Routes + **NotificationProvider** (global toast) |
+| `src/Navbar.jsx` | Nav links + **Logout** |
+| `src/Sign_Up.jsx` | **POST `/api/auth/register`** |
+| `src/Login.jsx` | **POST `/api/auth/login`** |
+| `src/FindDoctorSearch.jsx` | **Doctor search** inside appointment booking |
+| `src/AppointmentForm.jsx` | Name, phone, **date**, **time** |
+| `src/AppointmentFormIC.jsx` | **Only name + phone** (initial contact) |
+| `src/GiveReviews.jsx` | Review form; **disabled after submit** |
+| `src/ProfileCard.jsx` | Profile card + edit form |
+| `src/DoctorCard.jsx` | Doctor row + **cancel** + **localStorage** cleanup |
 
-Place course screenshots under `screenshots/` (`navbar_design.png`, `signup_form_design.png`, `login_form_design.png`, `launch.png`, and `screenshots-folder.png` for the folder view task).
+---
+
+## Screenshots folder
+
+Place **31** course screenshots as **`.png`** files under **`screenshots/`** (see `screenshots/SCREENSHOTS_CHECKLIST.txt`). Required names include `navbar_design.png`, `signup_form_design.png`, `login_form_design.png`, and `launch.png`.

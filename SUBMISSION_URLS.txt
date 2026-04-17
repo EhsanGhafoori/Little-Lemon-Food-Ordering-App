@@ -1,47 +1,37 @@
-Replace YOUR_USER and YOUR_REPO with your GitHub values (example: EhsanGhafoori / stayhealthy).
+Replace YOUR_USER. Use repository name **med_appt** if the autograder requires it.
 
-Task 4  README.md (blob):
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/README.md
+README (Task 4):
+https://github.com/YOUR_USER/med_appt/blob/main/README.md
 
-Task 5  Sign_Up.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/Sign_Up.jsx
+Sign_Up.jsx (Task 5):
+https://github.com/YOUR_USER/med_appt/blob/main/src/Sign_Up.jsx
 
-Task 6  Login.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/Login.jsx
+Login.jsx (Task 6):
+https://github.com/YOUR_USER/med_appt/blob/main/src/Login.jsx
 
-Task 7  Navbar.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/Navbar.jsx
+Navbar.jsx (Task 7):
+https://github.com/YOUR_USER/med_appt/blob/main/src/Navbar.jsx
 
-Task 8  FindDoctorSearch.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/FindDoctorSearch.jsx
+FindDoctorSearch.jsx (Task 8):
+https://github.com/YOUR_USER/med_appt/blob/main/src/FindDoctorSearch.jsx
 
-Task 9  App.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/App.jsx
+App.jsx (Task 9):
+https://github.com/YOUR_USER/med_appt/blob/main/src/App.jsx
 
-Task 10 AppointmentFormIC.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/AppointmentFormIC.jsx
+AppointmentFormIC.jsx (Task 10):
+https://github.com/YOUR_USER/med_appt/blob/main/src/AppointmentFormIC.jsx
 
-Task 11 GiveReviews.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/GiveReviews.jsx
+GiveReviews.jsx (Task 11):
+https://github.com/YOUR_USER/med_appt/blob/main/src/GiveReviews.jsx
 
-Task 12 ProfileCard.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/ProfileCard.jsx
+ProfileCard.jsx (Task 12):
+https://github.com/YOUR_USER/med_appt/blob/main/src/ProfileCard.jsx
 
-Task 14 index.html (root):
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/index.html
+index.html (Task 14):
+https://github.com/YOUR_USER/med_appt/blob/main/index.html
 
-Task 18 AppointmentForm.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/AppointmentForm.jsx
+AppointmentForm.jsx (Task 18):
+https://github.com/YOUR_USER/med_appt/blob/main/src/AppointmentForm.jsx
 
-Task 19 DoctorCard.jsx:
-https://github.com/YOUR_USER/YOUR_REPO/blob/main/src/DoctorCard.jsx
-
----
-
-Task 13 TEXT: open the file named `build` in this folder and paste its contents.
-
-Task 16 TEXT: paste contents of `register.txt` (or use your real API host).
-
-Task 17 TEXT: paste contents of `login.txt`.
-
-Upload files from `screenshots/` (tasks 1–3, 15, 21) and `patient_report.pdf` (task 20).
+DoctorCard.jsx (Task 19):
+https://github.com/YOUR_USER/med_appt/blob/main/src/DoctorCard.jsx

@@ -2,6 +2,10 @@ import { useState } from "react";
 import { getApiBase } from "./api.js";
 import { useNotification } from "./NotificationContext.jsx";
 
+/**
+ * Initial-contact appointment form — **only** Name and Phone Number fields (per rubric).
+ * doctorId is passed in programmatically for the API body, not shown as an input.
+ */
 export default function AppointmentFormIC({ doctorId, onBooked }) {
   const { notify } = useNotification();
   const [name, setName] = useState("");
@@ -37,21 +41,25 @@ export default function AppointmentFormIC({ doctorId, onBooked }) {
 
   return (
     <form className="card" onSubmit={handleSubmit}>
-      <h3>Immediate contact (name &amp; phone only)</h3>
-      <div className="field">
-        <label htmlFor="ic-name">Name</label>
-        <input id="ic-name" required value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div className="field">
-        <label htmlFor="ic-phone">Phone number</label>
-        <input
-          id="ic-phone"
-          type="tel"
-          required
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-      </div>
+      <fieldset style={{ border: "none", margin: 0, padding: 0 }}>
+        <legend style={{ fontWeight: 700, marginBottom: "1rem", display: "block" }}>
+          Initial contact
+        </legend>
+        <div className="field">
+          <label htmlFor="ic-name">Name</label>
+          <input id="ic-name" required value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div className="field">
+          <label htmlFor="ic-phone">Phone Number</label>
+          <input
+            id="ic-phone"
+            type="tel"
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+      </fieldset>
       <button className="btn btn-primary" type="submit" disabled={loading || !doctorId}>
         {loading ? "Sending…" : "Request callback"}
       </button>

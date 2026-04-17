@@ -21,12 +21,20 @@ export default function Appointments() {
     <div className="page">
       <h2>Appointments</h2>
       <ProfileCard />
-      <FindDoctorSearch
-        onResults={(list) => {
-          setDoctors(list.length ? list : [DEMO_DOCTOR]);
-          if (list[0]?.id) setSelectedId(list[0].id);
-        }}
-      />
+      <section aria-labelledby="appt-booking-heading">
+        <h2 id="appt-booking-heading" style={{ fontSize: "1.25rem", color: "#115e59" }}>
+          Appointment booking
+        </h2>
+        <p style={{ color: "#475569", marginTop: 0 }}>
+          Search for a provider, then book a slot or leave a review.
+        </p>
+        <FindDoctorSearch
+          onResults={(list) => {
+            setDoctors(list.length ? list : [DEMO_DOCTOR]);
+            if (list[0]?.id) setSelectedId(list[0].id);
+          }}
+        />
+      </section>
       <DoctorCard
         key={refreshKey}
         doctor={selectedDoctor}

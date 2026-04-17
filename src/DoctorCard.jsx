@@ -2,12 +2,36 @@ import { useState } from "react";
 import { getApiBase } from "./api.js";
 import { useNotification } from "./NotificationContext.jsx";
 
+const STORAGE_APPOINTMENTS = "stayhealthy_appointments";
+
+function removeAppointmentFromStorage(appointmentId) {
+  localStorage.removeItem(`stayhealthy_appt_${appointmentId}`);
+  const raw = localStorage.getItem(STORAGE_APPOINTMENTS);
+  if (!raw) return;
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) {
+      localStorage.removeItem(STORAGE_APPOINTMENTS);
+      return;
+    }
+    const next = arr.filter((row) => row?.id !== appointmentId);
+    if (next.length === 0) {
+      localStorage.removeItem(STORAGE_APPOINTMENTS);
+    } else {
+      localStorage.setItem(STORAGE_APPOINTMENTS, JSON.stringify(next));
+    }
+  } catch {
+    localStorage.removeItem(STORAGE_APPOINTMENTS);
+  }
+}
+
 export default function DoctorCard({ doctor, appointmentId, onCancelled }) {
   const { notify } = useNotification();
   const [loading, setLoading] = useState(false);
+  const [cancelled, setCancelled] = useState(false);
 
   async function cancelAppointment() {
-    if (!appointmentId) {
+    if (!appointmentId || cancelled) {
       notify("No active appointment to cancel.");
       return;
     }
@@ -23,6 +47,8 @@ export default function DoctorCard({ doctor, appointmentId, onCancelled }) {
       if (!res.ok) {
         throw new Error(data.message || "Cancel failed");
       }
+      removeAppointmentFromStorage(appointmentId);
+      setCancelled(true);
       notify("Appointment cancelled.");
       onCancelled?.(appointmentId);
     } catch (err) {
@@ -50,10 +76,15 @@ export default function DoctorCard({ doctor, appointmentId, onCancelled }) {
         <h4 style={{ margin: "0 0 0.25rem" }}>{doctor.name}</h4>
         <p style={{ margin: 0, color: "#475569" }}>{doctor.specialty}</p>
         {doctor.city ? <p style={{ margin: "0.25rem 0 0", fontSize: "0.9rem" }}>{doctor.city}</p> : null}
+        {cancelled ? (
+          <p style={{ margin: "0.5rem 0 0", color: "#b45309", fontWeight: 600 }}>Appointment cancelled</p>
+        ) : null}
       </div>
-      <button type="button" className="btn btn-danger" onClick={cancelAppointment} disabled={loading}>
-        {loading ? "Cancelling…" : "Cancel appointment"}
-      </button>
+      {!cancelled ? (
+        <button type="button" className="btn btn-danger" onClick={cancelAppointment} disabled={loading}>
+          {loading ? "Cancelling…" : "Cancel appointment"}
+        </button>
+      ) : null}
     </div>
   );
 }

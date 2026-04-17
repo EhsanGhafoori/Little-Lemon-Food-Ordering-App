@@ -1,3 +1,8 @@
+/**
+ * StayHealthy — **Appointment Booking** flow
+ * This component implements **doctor search** used when booking an appointment
+ * (keyword + specialty, then GET `/api/doctors/search`).
+ */
 import { useState } from "react";
 import { getApiBase } from "./api.js";
 import { useNotification } from "./NotificationContext.jsx";
@@ -33,7 +38,7 @@ export default function FindDoctorSearch({ onResults }) {
 
   return (
     <form className="card" onSubmit={handleSearch} style={{ marginBottom: "1.5rem" }}>
-      <h3>Find a doctor</h3>
+      <h3>Find a doctor (appointment booking)</h3>
       <div className="field">
         <label htmlFor="doc-search">Name or keyword</label>
         <input

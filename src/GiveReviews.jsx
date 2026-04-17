@@ -36,39 +36,31 @@ export default function GiveReviews({ doctorId }) {
   }
 
   return (
-    <form className="card" onSubmit={handleSubmit}>
+    <form className="card" onSubmit={handleSubmit} aria-disabled={submitted}>
       <h3>Leave a review</h3>
-      <div className="field">
-        <label htmlFor="rating">Rating (1–5)</label>
-        <select
-          id="rating"
-          value={rating}
-          disabled={submitted}
-          onChange={(e) => setRating(e.target.value)}
-        >
-          {[1, 2, 3, 4, 5].map((n) => (
-            <option key={n} value={n}>
-              {n}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="field">
-        <label htmlFor="comment">Comments</label>
-        <textarea
-          id="comment"
-          rows={4}
-          disabled={submitted}
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-      </div>
+      <fieldset disabled={submitted} style={{ border: "none", margin: 0, padding: 0 }}>
+        <legend className="sr-only">Review form</legend>
+        <div className="field">
+          <label htmlFor="rating">Rating (1–5)</label>
+          <select id="rating" value={rating} onChange={(e) => setRating(e.target.value)}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="field">
+          <label htmlFor="comment">Comments</label>
+          <textarea id="comment" rows={4} value={comment} onChange={(e) => setComment(e.target.value)} />
+        </div>
+      </fieldset>
       <button className="btn btn-primary" type="submit" disabled={loading || submitted || !doctorId}>
         {submitted ? "Review submitted" : loading ? "Submitting…" : "Submit review"}
       </button>
       {submitted ? (
-        <p style={{ marginTop: "0.75rem", color: "#047857" }}>
-          This form is disabled after submission to prevent duplicate reviews.
+        <p style={{ marginTop: "0.75rem", color: "#047857", fontWeight: 600 }}>
+          Form locked: post-submission disabling is active (no further edits).
         </p>
       ) : null}
     </form>
