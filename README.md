@@ -1,6 +1,17 @@
 # Little Lemon Menu (Android / Kotlin)
 
-Course-style capstone: load menu JSON from a **REST** endpoint with **Retrofit**, store rows in **Room**, show items with **sort by name**, **search**, and **category filters** (Appetizers, Salads, Beverages).
+Course-style capstone: load menu JSON from a **REST** endpoint with **Retrofit**, store rows in **Room** (SQLite on device), show items with **sort by name**, **search**, and **category filters** (Appetizers, Salads, Beverages).
+
+## Final assessment (four build parts)
+
+| Part | What to do | Where in this project |
+|------|------------|------------------------|
+| 1. Set up the app | Run in Android Studio | Whole `LittleLemonMenu` module |
+| 2. Sort & filter menu | Order-by-name button, search field, category chips | `MainActivity.kt`, `MenuItemsList.kt` |
+| 3. SQLite + display | Persist menu & read for UI | `AppDatabase.kt`, `MenuDao.kt`, `MenuViewModel.kt` |
+| 4. Query REST API | GET JSON, save to DB | `MenuApi.kt`, `MenuRepository.kt` |
+
+Step-by-step submission notes: **`FINAL_ASSESSMENT_GUIDE.txt`** in this folder.
 
 ## Sorting & search (Module 5 exercise)
 

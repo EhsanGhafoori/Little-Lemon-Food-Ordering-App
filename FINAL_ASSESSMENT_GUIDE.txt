@@ -1,0 +1,59 @@
+================================================================================
+LITTLE LEMON — FINAL PROJECT & PEER ASSESSMENT (course checklist)
+================================================================================
+Project folder: LittleLemonMenu
+Learning objectives this app demonstrates:
+  • Fetch data from the network (REST JSON)
+  • Store data in a database table (Room → SQLite on device)
+  • Read/query that data for the UI
+  • Present and manipulate presentation (sort, search, category filters)
+
+--------------------------------------------------------------------------------
+FOUR PARTS OF THE BUILD (map to this repo)
+--------------------------------------------------------------------------------
+
+1) Set up the app
+   • Jetpack Compose UI, Material 3, MainActivity, Gradle project under this folder.
+
+2) Sort and filter the menu
+   • MainActivity.kt: orderMenuItems + "Tap to Order By Name"
+   • searchPhrase + OutlinedTextField ("Search")
+   • Category FilterChips: Appetizers, Salads, Beverages (multi-select)
+   • MenuItemsList.kt: grouped list with title + price
+
+3) Use SQLite to display the menu
+   • Room: MenuItemEntity, MenuDao, AppDatabase (Room uses SQLite under the hood).
+   • Flow from dao.observeAll() → databaseMenuItems on screen.
+
+4) Query the REST API
+   • Retrofit: MenuApi.getMenu() → menu.json
+   • MenuRepository.refreshFromNetwork() loads JSON, then dao.replaceAll(...).
+   • Remote URL (after you push): raw GitHub .../LittleLemonMenu/main/menu.json
+   • Fallback: app/src/main/assets/menu.json if network URL fails.
+
+--------------------------------------------------------------------------------
+BEFORE YOU ZIP (peer upload)
+--------------------------------------------------------------------------------
+• Delete all "build" folders (app/build, project build, .gradle optional for size).
+• Right-click the LittleLemonMenu folder → Send to → Compressed (zipped) folder.
+• Upload that .zip in Coursera Peer Review.
+
+--------------------------------------------------------------------------------
+AFTER YOU SUBMIT
+--------------------------------------------------------------------------------
+• Review two peers: unzip their project, open in Android Studio, run emulator/device.
+• Complete the separate final graded quiz in the course (knowledge check).
+
+--------------------------------------------------------------------------------
+SELF-CHECK (typical peer rubric)
+--------------------------------------------------------------------------------
+□ Menu list shows each item with a price
+□ Data comes from API (Retrofit); table in Room/SQLite
+□ Items shown by category (Appetizers, Salads, Beverages)
+□ Filter controls change the list correctly (try combinations)
+□ Search bar filters the list by text
+□ Suggestion for improvement (one sentence in peer feedback if asked)
+
+================================================================================
+END
+================================================================================
