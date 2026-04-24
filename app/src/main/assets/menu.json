@@ -1,14 +1,7 @@
 [
-  {"id": 1, "title": "Bruschetta", "price": 8.99, "category": "Appetizers"},
-  {"id": 2, "title": "Hummus Trio", "price": 9.5, "category": "Appetizers"},
-  {"id": 3, "title": "Stuffed Grape Leaves", "price": 7.25, "category": "Appetizers"},
-  {"id": 4, "title": "Grilled Halloumi", "price": 10.0, "category": "Appetizers"},
-  {"id": 5, "title": "Greek Salad", "price": 12.99, "category": "Salads"},
-  {"id": 6, "title": "Caesar Salad", "price": 11.5, "category": "Salads"},
-  {"id": 7, "title": "Fattoush", "price": 10.75, "category": "Salads"},
-  {"id": 8, "title": "Lemon Arugula Salad", "price": 11.0, "category": "Salads"},
-  {"id": 9, "title": "Fresh Lemonade", "price": 4.5, "category": "Beverages"},
-  {"id": 10, "title": "Mint Iced Tea", "price": 3.99, "category": "Beverages"},
-  {"id": 11, "title": "Sparkling Water", "price": 2.5, "category": "Beverages"},
-  {"id": 12, "title": "House Red Wine", "price": 9.0, "category": "Beverages"}
+  {"id": 1, "title": "Greek Salad", "description": "The famous greek salad of crispy lettuce, peppers, olives and Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.", "price": 12.99, "category": "Starters", "image": "greekSalad.jpg"},
+  {"id": 2, "title": "Bruschetta", "description": "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.", "price": 7.99, "category": "Starters", "image": "bruschetta.jpg"},
+  {"id": 3, "title": "Grilled Fish", "description": "Barbequed catch of the day with red onion, crisp capers, chive creme fraiche and a hint of lemon.", "price": 20.00, "category": "Mains", "image": "grilledFish.jpg"},
+  {"id": 4, "title": "Pasta", "description": "Penne with fried aubergines, tomato sauce, fresh chili, garlic, basil and salted ricotta cheese.", "price": 18.99, "category": "Mains", "image": "pasta.jpg"},
+  {"id": 5, "title": "Lemon Dessert", "description": "Light and fluffy traditional homemade Italian Lemon and ricotta cake.", "price": 6.99, "category": "Desserts", "image": "lemonDessert.jpg"}
 ]

@@ -1,41 +1,54 @@
-# Little Lemon Menu (Android / Kotlin)
+# Little Lemon food ordering app (Android / Kotlin)
 
-Course-style capstone: load menu JSON from a **REST** endpoint with **Retrofit**, store rows in **Room** (SQLite on device), show items with **sort by name**, **search**, and **category filters** (Appetizers, Salads, Beverages).
+Peer-graded capstone: **onboarding + profile + persisted user details**, **Navigation Compose** (back stack), **home hero + search + scrollable menu list**, plus **Retrofit → Room** menu data.
 
-## Final assessment (four build parts)
+## Peer rubric (self-check)
 
-| Part | What to do | Where in this project |
-|------|------------|------------------------|
-| 1. Set up the app | Run in Android Studio | Whole `LittleLemonMenu` module |
-| 2. Sort & filter menu | Order-by-name button, search field, category chips | `MainActivity.kt`, `MenuItemsList.kt` |
-| 3. SQLite + display | Persist menu & read for UI | `AppDatabase.kt`, `MenuDao.kt`, `MenuViewModel.kt` |
-| 4. Query REST API | GET JSON, save to DB | `MenuApi.kt`, `MenuRepository.kt` |
+- **Wireframe image:** Export your Home screen wireframe from Figma as **JPG**, commit it to this repo (for example `wireframe_home.jpg` next to `README.md`) so reviewers can open it from GitHub.
+- **First launch:** Shows onboarding (`OnboardingScreen.kt`) to collect first name, last name, email; **Register** saves via **DataStore** (`UserPreferencesRepository.kt`).
+- **Home layout:** Hero (Little Lemon / Chicago + restaurant copy + **search**) and **menu list** (`HomeScreen.kt`, `MenuItemsList.kt`).
+- **Profile:** Populated from saved details (`ProfileScreen.kt`).
+- **Persistence:** User fields survive app restart (DataStore on disk).
+- **Log out:** Clears saved profile data and returns to onboarding.
+- **Navigation:** Stack navigation between onboarding, home, and profile; system **Back** returns from Profile → Home (`LittleLemonApp.kt`).
+- **Menu list:** Summarized rows (title, description, price, image placeholder).
+- **Reviewer prompt:** Be ready to suggest one improvement (UX, accessibility, tests, etc.).
 
-Step-by-step submission notes: **`FINAL_ASSESSMENT_GUIDE.txt`** in this folder.
+## Technical map
 
-## Sorting & search (Module 5 exercise)
-
-In `MainActivity.kt`:
-
-- `orderMenuItems` + **Tap to Order By Name** → `databaseMenuItems.sortedBy { it.title }`
-- `searchPhrase` + **OutlinedTextField** (“Search”) → filters by title
-- `menuItems` is the list passed into `MenuItemsList` after sort + search; category chips further narrow what is shown.
+| Area | Files |
+|------|--------|
+| Navigation | `LittleLemonApp.kt`, `AppDestinations.kt` |
+| User prefs | `UserPreferencesRepository.kt` |
+| Screens | `OnboardingScreen.kt`, `HomeScreen.kt`, `ProfileScreen.kt` |
+| Menu data | `MenuApi.kt`, `MenuRepository.kt`, `AppDatabase.kt`, `MenuDao.kt`, `MenuViewModel.kt` |
+| Layout | `HomeScreen.kt` (hero + chips + search), `MenuItemsList.kt` |
 
 ## Remote JSON
 
-- Bundled copy: `app/src/main/assets/menu.json`
-- Same file at repo root: `menu.json` (for GitHub raw URL)
-- Retrofit base URL: `https://raw.githubusercontent.com/EhsanGhafoori/LittleLemonMenu/main/`  
-  After you push this repository, the app can load `menu.json` over the network. Until then, the repository falls back to assets.
+- Bundled: `app/src/main/assets/menu.json`
+- Repo root: `menu.json` (GitHub raw URL used by Retrofit)
+- Base URL is set in `MenuRepository.kt` — push so `menu.json` matches.
 
 ## Project location
 
-This Android project lives at **`D:\Documents\Projects\courses\LittleLemonMenu`** (not inside the StayHealthy / `test1` web project).
+`D:\Documents\Projects\courses\17.04\test1\LittleLemonMenu`
 
-## Zip for peer upload
+## Coursera submission
 
-Delete `build` folders, then zip the whole `LittleLemonMenu` folder (Windows: Send to → Compressed folder).
+1. Add your wireframe export to the repo and push (for example `wireframe_home.png`).
+2. Coursera → **My submission** → Project title + **GitHub repo URL** (HTTPS) → Preview → Submit.
+3. Review two peers: clone their repo, open in Android Studio, run on emulator/device.
 
-## Open in Android Studio
+### Important
 
-File → Open → select `LittleLemonMenu` → Sync Gradle → Run on emulator or device.
+- Submit the URL of this Little Lemon mobile app repository, not an unrelated repository.
+- Reviewer checks include persisted onboarding/profile data, category filtering, and search behavior.
+
+## Zip upload (if zip is accepted instead of GitHub)
+
+Delete `build/` folders, then zip the whole `LittleLemonMenu` folder.
+
+## Open locally
+
+Android Studio → Open `LittleLemonMenu` → Sync Gradle → Run.
